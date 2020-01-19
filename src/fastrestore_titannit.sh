@@ -192,6 +192,7 @@ startplugins()
 }
 
 startmnt
+starthyprid
 startplugins
 #starthotplug
 startopkg
