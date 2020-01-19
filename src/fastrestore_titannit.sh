@@ -197,3 +197,7 @@ startplugins
 #starthotplug
 startopkg
 
+read model < /etc/model
+if [ "$model" == "spark7162" ]; then init 6;fi
+
+
