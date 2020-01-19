@@ -160,17 +160,11 @@ startmnt()
 	if [ -e /var/etc/.firstboot ] && [ "$board" == "hd51" ];then
 		umount /tmp/backup
 	fi
-	
-	reboot=0
-	if [ -e /var/etc/.firstboot ] && [ "$model" == "spark7162" ];then
-		starthyprid
-		reboot=1
-	fi
 
 	chmod -R 644 /mnt/network
 	rm /var/etc/.firstboot
 	touch /var/etc/.firstok
-	if [ "$reboot" == "1" ];then init 6;fi
+	starthyprid
 
 }
 
