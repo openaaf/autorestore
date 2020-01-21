@@ -46,6 +46,14 @@ startnetwork()
 			rm /etc/resolv.conf
 			ln -s /mnt/network/resolv.conf /etc/resolv.conf
 		fi
+		if [ ! -L /etc/hostname ];then
+			if [ ! -e /mnt/network/hostname ];then
+				mv -f /etc/hostname /mnt/network/hostname
+			else
+				rm /etc/hostname
+			fi
+			ln -s /mnt/network/hostname /etc/hostname
+		fi
 }
 
 startmnt()
