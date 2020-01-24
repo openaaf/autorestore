@@ -104,7 +104,7 @@ startmnt()
 #			mv -f $BACKUPDIR/.last $BACKUPDIR/.last.restored
 #			sync
 			showiframe /usr/share/restore.mvi &
-			BACKUPDIR="/media/backup"
+			BACKUPDIR="/var/backup"
 			settings.sh restore $BACKUPDIR
 		elif [ -e /var/etc/.firstboot ] && [ -e "/var/swap/$model/config/titan.cfg" ];then
 #			BACKUPDIR="/var/swap/.update"
@@ -113,7 +113,7 @@ startmnt()
 #			mv -f $BACKUPDIR/.last $BACKUPDIR/.last.restored
 #			sync
 			showiframe /usr/share/restore.mvi &
-			BACKUPDIR="/media/swap"
+			BACKUPDIR="/var/swap"
 			settings.sh restore $BACKUPDIR
 		elif [ -e /var/etc/.firstboot ] && [ -e "/tmp/backup/$model/config/titan.cfg" ];then
 			showiframe /usr/share/restore.mvi &
