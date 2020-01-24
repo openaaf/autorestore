@@ -160,6 +160,7 @@ startmnt()
 #			reboot
 		fi
 #		startnetwork restart
+		starthyprid mnt
 	fi
 	if [ -e /var/etc/.firstboot ] && [ "$board" == "dm900" ];then
 		umount /tmp/backup
@@ -172,8 +173,6 @@ startmnt()
 	chmod -R 644 /mnt/network
 	rm /var/etc/.firstboot
 	touch /var/etc/.firstok
-	starthyprid
-
 }
 
 startopkg()
