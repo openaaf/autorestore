@@ -200,4 +200,5 @@ startmnt
 startplugins
 #starthotplug
 startopkg
+startipsec &
 
