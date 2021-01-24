@@ -129,6 +129,7 @@ startmnt()
 				echo "remove mnt files"
 				rm -rf /mnt
 			fi
+#			cp -a /etc/titan.restore/mnt /
 			cp -a /etc/titan.restore/* /
 			mkdir /mnt/swapextensions
 			mkdir /mnt/bin
@@ -222,6 +223,5 @@ startplugins
 startskinlink
 #starthotplug
 startopkg
-startipsec &
 starthostname &
 
