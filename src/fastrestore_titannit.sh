@@ -23,6 +23,13 @@ startwebif()
 	fi
 }
 
+startskinlink()
+{
+	if [ ! -e "/lib/titan" ];then
+		ln -s /var/usr/local/share/titan/skin /lib/titan
+	fi
+}
+
 startautofs()
 {
 		echo "[$0] startautofs"
@@ -80,6 +87,11 @@ startmnt()
 			mount /dev/mmcblk0p3 /tmp/backup
 		fi
 
+		if [ -e /var/etc/.firstboot ] && [ -e /dev/mmcblk0p16 ];then 
+			mkdir /tmp/backup
+			mount /dev/mmcblk0p16 /tmp/backup
+		fi
+
 		if [ -e /var/etc/.firstboot ] && [ -e "/media/hdd/$model/config/titan.cfg" ];then
 #			BACKUPDIR="/media/hdd/.update"
 #			echo "[$0] startmnt: cp -a $BACKUPDIR/$model /mnt"
@@ -117,7 +129,7 @@ startmnt()
 				echo "remove mnt files"
 				rm -rf /mnt
 			fi
-			cp -a /etc/titan.restore/mnt /
+			cp -a /etc/titan.restore/* /
 			mkdir /mnt/swapextensions
 			mkdir /mnt/bin
 			mkdir /mnt/tpk
@@ -162,6 +174,10 @@ startmnt()
 		umount /tmp/backup
 	fi
 
+	if [ -e /var/etc/.firstboot ] && [ -e /dev/mmcblk0p16 ];then
+		umount /tmp/backup
+	fi
+
 	chmod -R 644 /mnt/network
 	rm /var/etc/.firstboot
 	touch /var/etc/.firstok
@@ -192,8 +208,18 @@ startplugins()
 	fi
 }
 
+startpasswd()
+{
+	echo "[$0] startpasswd"
+	if [ ! -e /etc/titan.restore/etc/passwd ];then
+		cp /etc/passwd /etc/titan.restore/etc/passwd
+	fi
+}
+
+startpasswd
 startmnt
 startplugins
+startskinlink
 #starthotplug
 startopkg
 startipsec &
