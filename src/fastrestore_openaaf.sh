@@ -28,6 +28,11 @@ startskinlink()
 	if [ ! -e "/lib/titan" ];then
 		ln -s /var/usr/local/share/titan/skin /lib/titan
 	fi
+	if [ ! -L /var/usr/local/share/titan/skin ];then
+		echo "[$0] startskin link skin"
+		rm -rf /var/usr/local/share/titan/skin
+		ln -sf /usr/local/share/titan/skin /var/usr/local/share/titan/skin
+	fi
 }
 
 startautofs()
