@@ -214,6 +214,15 @@ startplugins()
 	fi
 }
 
+startsaver()
+{
+	if [ ! -L /var/usr/local/share/titan/saver ];then
+		echo "[$0] startsaver link saver"
+		rm -rf /var/usr/local/share/titan/saver
+		ln -sf /usr/local/share/titan/saver /var/usr/local/share/titan/saver
+	fi
+}
+
 startpasswd()
 {
 	echo "[$0] startpasswd"
@@ -225,6 +234,7 @@ startpasswd()
 startpasswd
 startmnt
 startplugins
+startsaver
 startskinlink
 #starthotplug
 startopkg
