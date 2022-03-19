@@ -189,19 +189,32 @@ startmnt()
 	touch /var/etc/.firstok
 }
 
+startipkg()
+{
+	if [ ! -L /usr/lib/ipkg ];then
+        echo "[$0] startipkg link /var/lib/opkg > /usr/bin/ipkg"
+        rm -rf /usr/lib/ipkg
+        ln -sf /var/lib/opkg /usr/lib/ipkg
+	fi
+	if [ ! -e /usr/bin/ipkg ];then
+        echo "[$0] startipkg link /usr/bin/ipkg-cl > /usr/bin/ipkg"
+        ln -sf /usr/bin/ipkg-cl /usr/bin/ipkg
+	fi
+}
+
 startopkg()
 {
 	if [ $(cat /etc/opkg/opkg.conf | grep "dest / /" | wc -l) -eq 0 ];then
 		echo "[$0] startopkg add /var"
-		echo "dest /var /var" >> /etc/opkg/opkg.conf
+		echo "dest var /var" >> /etc/opkg/opkg.conf
 	fi
-	if [ $(cat /etc/opkg/opkg.conf | grep "dest /mnt/swapextensions /mnt/swapextensions" | wc -l) -eq 0 ];then
+	if [ $(cat /etc/opkg/opkg.conf | grep "dest mnt /mnt/swapextensions" | wc -l) -eq 0 ];then
 		echo "[$0] startopkg add /mnt/swapextensions"
-		echo "dest /mnt/swapextensions /mnt/swapextensions" >> /etc/opkg/opkg.conf
+		echo "dest mnt /mnt/swapextensions" >> /etc/opkg/opkg.conf
 	fi
-	if [ $(cat /etc/opkg/opkg.conf | grep "dest /var/swap /var/swap" | wc -l) -eq 0 ];then
+	if [ $(cat /etc/opkg/opkg.conf | grep "dest swap /var/swap" | wc -l) -eq 0 ];then
 		echo "[$0] startopkg add /var/swap"
-		echo "dest /var/swap /var/swap" >> /etc/opkg/opkg.conf
+		echo "dest swap /var/swap" >> /etc/opkg/opkg.conf
 	fi
 }
 
@@ -238,5 +251,6 @@ startsaver
 startskinlink
 #starthotplug
 startopkg
+startipkg
 starthostname &
 
