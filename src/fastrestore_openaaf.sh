@@ -206,15 +206,15 @@ startopkg()
 {
 	if [ $(cat /etc/opkg/opkg.conf | grep "dest / /" | wc -l) -eq 0 ];then
 		echo "[$0] startopkg add /var"
-		echo "dest var /var" >> /etc/opkg/opkg.conf
+		echo "dest /var /var" >> /etc/opkg/opkg.conf
 	fi
 	if [ $(cat /etc/opkg/opkg.conf | grep "dest mnt /mnt/swapextensions" | wc -l) -eq 0 ];then
 		echo "[$0] startopkg add /mnt/swapextensions"
-		echo "dest mnt /mnt/swapextensions" >> /etc/opkg/opkg.conf
+		echo "dest /mnt/swapextensions /mnt/swapextensions" >> /etc/opkg/opkg.conf
 	fi
 	if [ $(cat /etc/opkg/opkg.conf | grep "dest swap /var/swap" | wc -l) -eq 0 ];then
 		echo "[$0] startopkg add /var/swap"
-		echo "dest swap /var/swap" >> /etc/opkg/opkg.conf
+		echo "dest /var/swap /var/swap" >> /etc/opkg/opkg.conf
 	fi
 }
 
