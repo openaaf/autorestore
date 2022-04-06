@@ -191,11 +191,12 @@ startmnt()
 
 startipkg()
 {
-	if [ ! -L /usr/lib/ipkg ];then
-        echo "[$0] startipkg link /var/lib/opkg > /usr/bin/ipkg"
-        rm -rf /usr/lib/ipkg
-        ln -sf /var/lib/opkg /usr/lib/ipkg
-	fi
+	if [ ! -e /etc/ipkg/ipkg.conf ];then    
+        echo "dest root /" > /etc/ipkg/ipkg.conf
+        echo "dest /var /var" >> /etc/ipkg/ipkg.conf
+        echo "dest /mnt/swapextensions /mnt/swapextensions" >> /etc/ipkg/ipkg.conf
+        echo "dest /var/swap /var/swap" >> /etc/ipkg/ipkg.conf
+    fi
 	if [ ! -e /usr/bin/ipkg ];then
         echo "[$0] startipkg link /usr/bin/ipkg-cl > /usr/bin/ipkg"
         ln -sf /usr/bin/ipkg-cl /usr/bin/ipkg
@@ -204,15 +205,15 @@ startipkg()
 
 startopkg()
 {
-	if [ $(cat /etc/opkg/opkg.conf | grep "dest / /" | wc -l) -eq 0 ];then
+	if [ $(cat /etc/opkg/opkg.conf | grep "dest /var /var" | wc -l) -eq 0 ];then
 		echo "[$0] startopkg add /var"
 		echo "dest /var /var" >> /etc/opkg/opkg.conf
 	fi
-	if [ $(cat /etc/opkg/opkg.conf | grep "dest mnt /mnt/swapextensions" | wc -l) -eq 0 ];then
+	if [ $(cat /etc/opkg/opkg.conf | grep "dest /mnt/swapextensions /mnt/swapextensions" | wc -l) -eq 0 ];then
 		echo "[$0] startopkg add /mnt/swapextensions"
 		echo "dest /mnt/swapextensions /mnt/swapextensions" >> /etc/opkg/opkg.conf
 	fi
-	if [ $(cat /etc/opkg/opkg.conf | grep "dest swap /var/swap" | wc -l) -eq 0 ];then
+	if [ $(cat /etc/opkg/opkg.conf | grep "dest /var/swap /var/swap" | wc -l) -eq 0 ];then
 		echo "[$0] startopkg add /var/swap"
 		echo "dest /var/swap /var/swap" >> /etc/opkg/opkg.conf
 	fi
