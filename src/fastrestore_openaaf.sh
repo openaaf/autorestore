@@ -65,7 +65,7 @@ startmnt()
 	echo "[$0] startmnt"
 	if [ -L /mnt ] || [ -e /var/etc/.firstboot ];then
 		if [ -e /media/settings ];then
-			mv -f /media/settings/* /etc/titan.restore/settings
+			mv -f /media/settings/* /etc/titan.restore/mnt/settings
 			rm -rf /media/settings
 		fi
 		rm -f /mnt
