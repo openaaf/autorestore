@@ -64,14 +64,6 @@ startmnt()
 {
 	echo "[$0] startmnt"
 	if [ -L /mnt ] || [ -e /var/etc/.firstboot ];then
-ls -al /media
-ls -al /media/settings
-
-		if [ -e /media/settings ];then
-	echo "[$0] startmnt 2"
-			mv -f /media/settings/* /etc/titan.restore/mnt/settings
-			rm -rf /media/settings
-		fi
 		rm -f /mnt
 		startautofs
 		startnetwork
