@@ -70,6 +70,8 @@ startmnt()
 		startwebif
 	fi
 
+	startudev
+
 	if [ -e /var/etc/.erasemtd ] || [ ! -e /mnt/swapextensions ]; then
 		if [ -e /var/etc/.backupmtd ]; then
 			mkdir /tmp/backupmtd
