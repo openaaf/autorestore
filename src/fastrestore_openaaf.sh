@@ -115,8 +115,8 @@ startmnt()
 			showiframe /usr/share/restore.mvi &
 			BACKUPDIR="/var/backup"
 			settings.sh restore $BACKUPDIR
-		elif [ -e /var/etc/.firstboot ] && [ -e "/var/swap/$model/config/titan.cfg" ];then
-#			BACKUPDIR="/var/swap/.update"
+		elif [ -e /var/etc/.firstboot ] && [ -e "/var/swapextensions/$model/config/titan.cfg" ];then
+#			BACKUPDIR="/var/swapextensions/.update"
 #			echo "[$0] startmnt: cp -a $BACKUPDIR/$model /mnt"
 #			cp -a $BACKUPDIR/$model /mnt
 #			mv -f $BACKUPDIR/.last $BACKUPDIR/.last.restored
