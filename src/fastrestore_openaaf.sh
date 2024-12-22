@@ -42,10 +42,6 @@ startautofs()
 			rm /etc/auto.network
 			ln -s /mnt/network/auto.misc /etc/auto.network
 		fi
-		if [ ! -L /etc/auto.master ];then
-			rm /etc/auto.master
-			ln -s /etc/titan.restore/etc/auto.master /etc/auto.network
-		fi
 		if [ ! -L /autofs ];then
 			ln -s /media/autofs /autofs
 		fi
