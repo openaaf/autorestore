@@ -97,6 +97,11 @@ startmnt()
 			mount /dev/mmcblk0p16 /tmp/backup
 		fi
 
+		if [ -e /var/etc/.firstboot ] && [ -e /dev/mmcblk0p23 ];then 
+			mkdir /tmp/backup
+			mount /dev/mmcblk0p23 /tmp/backup
+		fi
+
 		if [ -e /var/etc/.firstboot ] && [ -e "/media/hdd/$model/config/titan.cfg" ];then
 #			BACKUPDIR="/media/hdd/.update"
 #			echo "[$0] startmnt: cp -a $BACKUPDIR/$model /mnt"
@@ -181,6 +186,10 @@ startmnt()
 	fi
 
 	if [ -e /var/etc/.firstboot ] && [ -e /dev/mmcblk0p16 ];then
+		umount /tmp/backup
+	fi
+
+	if [ -e /var/etc/.firstboot ] && [ -e /dev/mmcblk0p23 ];then
 		umount /tmp/backup
 	fi
 
